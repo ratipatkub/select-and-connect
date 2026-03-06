@@ -7,7 +7,10 @@
 <body>
     <?php
     require "connect.php";
-    $sql = "SELECT * FROM customer";
+    $sql = "SELECT `CustomerID`,`Name`,`Birthdate`,`Email`,country.CountryName,`OutstandingDebt`
+FROM Customer
+left JOIN country on country.CountryCode = customer.CountryCode
+WHERE CountryName = 'ไทย'";
 
     $stmt = $conn->prepare($sql);
     $stmt->execute();
@@ -20,18 +23,18 @@
             <th width="140">
                 <div align="center">ชื่อ</div>
             </th>
-            <th width="120">
+            <!-- <th width="120">
                 <div align="center">วันเกิด</div>
-            </th>
+            </th> -->
             <th width="100">
                 <div align="center">อีเมล์</div>
             </th>
             <th width="50">
                 <div align="center">ประเทศ</div>
             </th>
-            <th width="70">
+            <!-- <th width="70">
                 <div align="center">ยอดหนี้</div>
-            </th>
+            </th> -->
         </tr>
 
         <?php
@@ -48,14 +51,14 @@
                     <?php echo $result["Name"]; ?>
                 </td>
 
-                <td><?php echo $result["Birthdate"]; ?>
-                </td>
+                <!-- <td><?php echo $result["Birthdate"]; ?>
+                </td> -->
                 <td><?php echo $result["Email"]; ?>
                 </td>
-                <td><?php echo $result["CountryCode"]; ?></div>
+                <td><?php echo $result["CountryName"]; ?></div>
                 </td>
-                <td><?php echo $result["OutstandingDebt"]; ?>
-                </td>
+                <!-- <td><?php echo $result["OutstandingDebt"]; ?>
+                </td> -->
             </tr>
         <?php
         }
